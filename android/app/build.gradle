@@ -32,6 +32,9 @@ if (project.hasProperty('dart-defines')) {
             def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
             [(pair.first()): pair.last()]
         }
+    if (dartEnvironmentVariables.FLAVOR != null) { 
+        dartEnvironmentVariables.APP_NAME = "${dartEnvironmentVariables.APP_NAME}.${dartEnvironmentVariables.FLAVOR}"
+    }
 }
 
 
@@ -64,7 +67,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         resValue "string", "app_name", dartEnvironmentVariables.APP_NAME 
-            if(dartEnvironmentVariables.FLAVOR != null) + ".${dartEnvironmentVariables.FLAVOR}"
+           
     }
 
     buildTypes {
